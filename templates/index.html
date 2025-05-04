@@ -5,141 +5,126 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Heart Disease Predictor</title>
   <style>
-  body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f2f2f2;
-  margin: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* keeps content top-aligned */
-  min-height: 100vh;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-h1 {
-  color: #333;
-  margin-bottom: 20px;
-}
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
 
-form {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  max-width: 600px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 30px; /* vertical and horizontal gaps */
-  align-self: flex-start; /* keep the form top-aligned */
-}
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 30px;
+      max-width: 700px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
 
-form > div {
-  display: flex;
-  flex-direction: column;
-}
+    form > div {
+      display: flex;
+      flex-direction: column;
+    }
 
-label {
-  margin-bottom: 5px;
-  font-weight: 500;
-}
+    label {
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
 
-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
 
-button {
-  grid-column: span 2;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  margin-top: 10px;
-}
+    button {
+      grid-column: span 2;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    button:hover {
+      background-color: #0056b3;
+    }
 
-#result {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #222;
-  text-align: center;
-}
+    #resultBox {
+      display: none;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 600px;
+      margin-top: 20px;
+    }
 
+    #resultText {
+      font-size: 20px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    #resetBtn {
+      background-color: #28a745;
+    }
+
+    #resetBtn:hover {
+      background-color: #1e7e34;
+    }
   </style>
 </head>
 <body>
   <h1>Heart Disease Predictor</h1>
+
   <form id="predictForm">
-    <!-- Input fields for each feature -->
-    <div>
-      <label for="age">Age</label>
-      <input type="number" id="age" required />
-    </div>
-    <div>
-      <label for="sex">Sex (1=Male, 0=Female)</label>
-      <input type="number" id="sex" required />
-    </div>
-    <div>
-      <label for="cp">Chest Pain Type (0-3)</label>
-      <input type="number" id="cp" required />
-    </div>
-    <div>
-      <label for="trestbps">Resting Blood Pressure</label>
-      <input type="number" id="trestbps" required />
-    </div>
-    <div>
-      <label for="chol">Cholesterol</label>
-      <input type="number" id="chol" required />
-    </div>
-    <div>
-      <label for="fbs">Fasting Blood Sugar (1 if >120 mg/dl)</label>
-      <input type="number" id="fbs" required />
-    </div>
-    <div>
-      <label for="restecg">Resting ECG (0–2)</label>
-      <input type="number" id="restecg" required />
-    </div>
-    <div>
-      <label for="thalach">Max Heart Rate Achieved</label>
-      <input type="number" id="thalach" required />
-    </div>
-    <div>
-      <label for="exang">Exercise Induced Angina (0 or 1)</label>
-      <input type="number" id="exang" required />
-    </div>
-    <div>
-      <label for="oldpeak">Oldpeak</label>
-      <input type="number" step="any" id="oldpeak" required />
-    </div>
-    <div>
-      <label for="slope">Slope of Peak Exercise ST Segment (0-2)</label>
-      <input type="number" id="slope" required />
-    </div>
-    <div>
-      <label for="ca">Number of Major Vessels (0-3)</label>
-      <input type="number" id="ca" required />
-    </div>
-    <div>
-      <label for="thal">Thal (0=Normal, 1=Fixed Defect, 2=Reversible)</label>
-      <input type="number" id="thal" required />
-    </div>
+    <div><label for="age">Age</label><input type="number" id="age" required /></div>
+    <div><label for="sex">Sex (1=Male, 0=Female)</label><input type="number" id="sex" required /></div>
+    <div><label for="cp">Chest Pain Type (0-3)</label><input type="number" id="cp" required /></div>
+    <div><label for="trestbps">Resting Blood Pressure</label><input type="number" id="trestbps" required /></div>
+    <div><label for="chol">Cholesterol</label><input type="number" id="chol" required /></div>
+    <div><label for="fbs">Fasting Blood Sugar (1 if >120 mg/dl)</label><input type="number" id="fbs" required /></div>
+    <div><label for="restecg">Resting ECG (0–2)</label><input type="number" id="restecg" required /></div>
+    <div><label for="thalach">Max Heart Rate Achieved</label><input type="number" id="thalach" required /></div>
+    <div><label for="exang">Exercise Induced Angina (0 or 1)</label><input type="number" id="exang" required /></div>
+    <div><label for="oldpeak">Oldpeak</label><input type="number" step="any" id="oldpeak" required /></div>
+    <div><label for="slope">Slope (0-2)</label><input type="number" id="slope" required /></div>
+    <div><label for="ca">Major Vessels (0-3)</label><input type="number" id="ca" required /></div>
+    <div><label for="thal">Thal (0=Normal, 1=Fixed, 2=Reversible)</label><input type="number" id="thal" required /></div>
     <button type="submit">Predict</button>
   </form>
 
-  <div id="result"></div>
+  <div id="resultBox">
+    <div id="resultText"></div>
+    <button id="resetBtn">Reset Form</button>
+  </div>
 
   <script>
-    document.getElementById("predictForm").addEventListener("submit", async function(e) {
+    const form = document.getElementById("predictForm");
+    const resultBox = document.getElementById("resultBox");
+    const resultText = document.getElementById("resultText");
+    const resetBtn = document.getElementById("resetBtn");
+
+    form.addEventListener("submit", async function(e) {
       e.preventDefault();
 
       const inputData = [
@@ -158,14 +143,35 @@ button:hover {
         +document.getElementById("thal").value
       ];
 
-      const response = await fetch("/predict", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input: inputData })
-      });
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ input: inputData })
+        });
 
-      const result = await response.json();
-      document.getElementById("result").innerText = result.prediction || `Error: ${result.error}`;
+        const result = await response.json();
+
+        if (result.prediction) {
+          resultText.innerText = result.prediction;
+        } else {
+          resultText.innerText = `Error: ${result.error}`;
+        }
+
+        form.style.display = "none";
+        resultBox.style.display = "block";
+
+      } catch (err) {
+        resultText.innerText = "Something went wrong!";
+        form.style.display = "none";
+        resultBox.style.display = "block";
+      }
+    });
+
+    resetBtn.addEventListener("click", function () {
+      form.reset();
+      form.style.display = "grid";
+      resultBox.style.display = "none";
     });
   </script>
 </body>
