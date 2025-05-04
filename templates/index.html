@@ -46,6 +46,12 @@
       outline: none;
     }
 
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
     button {
       padding: 10px 20px;
       background-color: #ff7e5f;
@@ -54,6 +60,13 @@
       font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
+    }
+
+    .reset{
+        background-color: #9ea89b !important;
+    }
+    .reset:hover{
+        background-color: #5d685a !important;
     }
 
     button:hover {
@@ -75,10 +88,12 @@
 
     <h2>Heart Disease Detection</h2>
     
-    <!-- For now: one dummy input -->
     <input type="text" id="userInput" placeholder="e.g., 63,1,3,145,233,1,0,150,0,2.3,0,0,1" />
-    <br>
-    <button onclick="handleSubmit()">Submit</button>
+    
+    <div class="btn-group">
+      <button onclick="handleSubmit()">Submit</button>
+      <button class="reset" onclick="resetForm()">Reset</button>
+    </div>
 
     <div class="output" id="outputArea"></div>
   </div>
@@ -112,6 +127,11 @@
         output.innerHTML = `<span style="color:red;">Server Error</span>`;
         console.error(err);
       });
+    }
+
+    function resetForm() {
+      document.getElementById('userInput').value = '';
+      document.getElementById('outputArea').innerHTML = '';
     }
   </script>
 

@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 CORS(app)
-
+ 
 # Load dataset
 file_id = '1iUUEUPatYynmjqKar2YVqoGGRYDpdCcU'
 url = f'https://drive.google.com/uc?id={file_id}'
@@ -31,7 +31,7 @@ model.fit(X_train, y_train)
 @app.route('/')
 def index():
     return render_template('index.html')
-
+ 
 # Prediction API
 @app.route('/predict', methods=['POST'])
 def predict():
