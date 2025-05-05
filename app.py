@@ -1,11 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import os
 
-# Initialize Flask app
 app = Flask(__name__)
 
 # Load and prepare data
@@ -25,7 +24,7 @@ model.fit(X_train, Y_train)
 
 @app.route('/')
 def home():
-    return "Heart Disease Prediction API is running."
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -49,5 +48,5 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))  # Use PORT env var or default to 8080
+    port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
