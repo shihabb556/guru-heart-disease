@@ -100,34 +100,34 @@
 
   <script>
     function handleSubmit() {
-      const inputText = document.getElementById('userInput').value.trim();
-      const output = document.getElementById('outputArea');
+  const inputText = document.getElementById('userInput').value.trim();
+  const output = document.getElementById('outputArea');
 
-      if (inputText === '') {
-        output.innerHTML = '<span style="color: red;">Please enter input values.</span>';
-        return;
-      }
+  if (inputText === '') {
+    output.innerHTML = '<span style="color: red;">Please enter input values.</span>';
+    return;
+  }
 
-      const inputArray = inputText.split(',').map(Number);
+  const inputArray = inputText.split(',').map(Number);
 
-      fetch('/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ input: inputArray })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.prediction) {
-          output.innerHTML = `<strong>${data.prediction}</strong>`;
-        } else {
-          output.innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
-        }
-      })
-      .catch(err => {
-        output.innerHTML = `<span style="color:red;">Server Error</span>`;
-        console.error(err);
-      });
+  fetch('/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ features: inputArray })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.prediction !== undefined) {
+      output.innerHTML = `<strong>${data.message}</strong>`;
+    } else {
+      output.innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
     }
+  })
+  .catch(err => {
+    output.innerHTML = `<span style="color:red;">Server Error</span>`;
+    console.error(err);
+  });
+}
 
     function resetForm() {
       document.getElementById('userInput').value = '';
