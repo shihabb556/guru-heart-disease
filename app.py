@@ -39,7 +39,7 @@ def predict():
         data = request.get_json(force=True)
         input_features = np.array(data['input']).reshape(1, -1)
         prediction = model.predict(input_features)
-        result = "The person has heart disease" if prediction[0] == 1 else "The person does not have heart disease"
+        result = "The person does not have heart disease" if prediction[0] == 0 else "The person have heart disease"
         return jsonify({'prediction': result})
     except Exception as e:
         return jsonify({'error': str(e)}), 400
